@@ -7,7 +7,7 @@ import productRoutes from "./routes/productRoutes.js";
 
 const port = process.env.PORT || 5000;
 
-connectDB(); //Connect to MongoDB
+connectDB(); //Connect to MongoDB using config/db.js
 
 const app = express();
 
