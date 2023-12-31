@@ -11,6 +11,9 @@ const port = process.env.PORT || 5000;
 connectDB(); //Connect to MongoDB using config/db.js
 
 const app = express();
+//Body parser middleware
+app.use(express.json()); //raw json
+app.use(express.urlencoded({ extended: true })); //urlencoded data
 
 app.get("/", (req, res) => {
 	res.send("API running beeyatch");
