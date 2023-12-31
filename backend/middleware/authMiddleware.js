@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import asyncHandler from "./asyncHandler.js";
 import User from "../models/userModel.js";
-
+//authentication = login -> create jwt web token -> store it in an http only cookie -> send that cookie with every request after that and validate it with middleware (authMiddleWare)
 //Protect routes
 const protect = asyncHandler(async (req, res, next) => {
 	let token;

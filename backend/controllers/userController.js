@@ -2,6 +2,8 @@ import asyncHandler from "../middleware/asyncHandler.js";
 import User from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
 
+//authentication = login -> create jwt web token -> store it in an http only cookie -> send that cookie with every request after that and validate it with middleware (authMiddleWare)
+
 //@desc Auth user & get token
 //@route POST /api/users/login
 //@access Public
