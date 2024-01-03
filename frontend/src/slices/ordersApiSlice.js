@@ -1,5 +1,5 @@
 import { apiSlice } from "./apiSlice";
-import { ORDERS_URL } from "..constants";
+import { ORDERS_URL } from "../constants";
 
 //injectEndpoints into apiSlice, which is connected to the store.js
 export const ordersApiSlice = apiSlice.injectEndpoints({
