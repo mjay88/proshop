@@ -6,7 +6,40 @@ import Order from "../models/orderModel.js";
 //@access Private
 const addOrderItems = asyncHandler(async (req, res) => {
 	//get all products from data base with empty object
-	res.send("add order items");
+	const {
+		orderItems,
+		shippingAddress,
+		paymentMethod,
+		itemsPrice,
+		taxPrice,
+		shippingPrice,
+		totalPrice,
+	} = req.body;
+
+	if (orderItems && orderItems.length === 0) {
+		res.staus(400);
+		throw new Error("No order items");
+	} else {
+		const order = new Order({
+			//mapping and adding properties before we submit to the database
+			orderItems: orderItems.map((order) => ({
+				...order,
+				product: order._id,
+				_id: undefined,
+			})),
+			user: req.user._id,
+			shippingAddress,
+			paymentMethod,
+			itemsPrice,
+			taxPrice,
+			shippingPrice,
+			totalPrice,
+		});
+
+		const createdOrder = await order.save();
+
+		res.status(201).json(createdOrder);
+	}
 });
 
 //@desc get logged in user orders
@@ -14,7 +47,8 @@ const addOrderItems = asyncHandler(async (req, res) => {
 //@access Private
 const getMyOrders = asyncHandler(async (req, res) => {
 	//get all products from data base with empty object
-	res.send("add my orders");
+	const orders = await Order.find({ user: req.user._id });
+	res.status(200).json(orders);
 });
 
 //@desc get order by Id
@@ -22,7 +56,18 @@ const getMyOrders = asyncHandler(async (req, res) => {
 //@access Admin/Private
 const getOrderById = asyncHandler(async (req, res) => {
 	//get all products from data base with empty object
-	res.send("add order by id");
+	//find the order (order may be several products) by id, populate the users name and email
+	const order = await Order.findById(req.params.id).populate(
+		"user",
+		"name email"
+	);
+
+	if (order) {
+		res.status(200).json(order);
+	} else {
+		res.status(404);
+		throw new Error("Order not found");
+	}
 });
 
 //@desc update order to payed
