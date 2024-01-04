@@ -52,8 +52,6 @@ const ProfileScreen = () => {
 		}
 	};
 
-	console.log(orders);
-
 	return (
 		<Row>
 			<Col md={3}>

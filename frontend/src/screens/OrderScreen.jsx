@@ -70,6 +70,7 @@ const OrderScreen = () => {
 			}
 		});
 	}
+
 	async function onApproveTest() {
 		await payOrder({ orderId, details: { payer: {} } });
 		refetch();
