@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector, dispatch, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { toast } from "react-toastify";
 import CheckoutSteps from "../components/CheckoutSteps";
