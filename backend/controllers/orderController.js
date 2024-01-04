@@ -107,7 +107,8 @@ const updateOrderToDelivered = asyncHandler(async (req, res) => {
 //@access Admin
 const getOrders = asyncHandler(async (req, res) => {
 	//get all products from data base with empty object
-	res.send("get all orders");
+	const orders = await Order.find({}).populate("user", "id name");
+	res.status(200).json(orders);
 });
 
 export {
