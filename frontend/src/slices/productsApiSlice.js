@@ -8,7 +8,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
 				//replaces regular fetch request, useEffect and useState we had on HomeScreen
 				url: PRODUCTS_URL,
 			}),
-			providesTags: ["Product"],
+			providesTags: ["Products"],
 			keepUnusedDataFor: 5,
 		}),
 		getProductDetails: builder.query({
@@ -23,7 +23,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
 				url: PRODUCTS_URL,
 				method: "POST",
 			}),
-			invalidatesTags: ["Product"], //stop from being cached so we have fresh data
+			invalidatesTags: ["Products"], //stop from being cached so we have fresh data
 		}),
 		updateProduct: builder.mutation({
 			query: (data) => ({
@@ -31,7 +31,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
 				method: "PUT",
 				body: data,
 			}),
-			invalidatesTags: ["Product"],
+			invalidatesTags: ["Products"],
 		}),
 	}),
 });
