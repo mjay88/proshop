@@ -8,6 +8,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
 				//replaces regular fetch request, useEffect and useState we had on HomeScreen
 				url: PRODUCTS_URL,
 			}),
+			providesTags: ["Product"],
 			keepUnusedDataFor: 5,
 		}),
 		getProductDetails: builder.query({
@@ -24,6 +25,14 @@ export const productsApiSlice = apiSlice.injectEndpoints({
 			}),
 			invalidatesTags: ["Product"], //stop from being cached so we have fresh data
 		}),
+		updateProduct: builder.mutation({
+			query: (data) => ({
+				url: `${PRODUCTS_URL}/${data._id}`,
+				method: "PUT",
+				body: data,
+			}),
+			invalidatesTags: ["Product"],
+		}),
 	}),
 });
 
@@ -31,4 +40,5 @@ export const {
 	useGetProductsQuery,
 	useGetProductDetailsQuery,
 	useCreateProductMutation,
+	useUpdateProductMutation,
 } = productsApiSlice;
