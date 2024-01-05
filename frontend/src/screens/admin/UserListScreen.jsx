@@ -3,17 +3,31 @@ import { Table, Button } from "react-bootstrap";
 import { FaTrash, FaTimes, FaEdit, FaCheck } from "react-icons/fa";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
-import { useGetUsersQuery } from "../../slices/usersApiSlice";
+import { toast } from "react-toastify";
+import {
+	useGetUsersQuery,
+	useDeleteUserMutation,
+} from "../../slices/usersApiSlice";
 
 const UserListScreen = () => {
 	const { data: users, isLoading, error, refetch } = useGetUsersQuery();
+	const [deleteUser, { isLoading: loadingDelete }] = useDeleteUserMutation();
 
-	const deleteHandler = () => {
-		console.log("deleted");
+	const deleteHandler = async (id) => {
+		if (window.confirm("Are you sure?")) {
+			try {
+				await deleteUser(id);
+				refetch();
+				toast.success("Deleted user");
+			} catch (err) {
+				toast.error(err?.data?.message || err.error);
+			}
+		}
 	};
 	return (
 		<>
 			<h1>Users</h1>
+			{loadingDelete && <Loader />}
 			{isLoading ? (
 				<Loader />
 			) : error ? (

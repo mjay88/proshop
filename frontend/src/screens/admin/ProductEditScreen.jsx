@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { LinkContainer } from "react-router-bootstrap";
 import { Form, Button } from "react-bootstrap";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
@@ -26,7 +25,6 @@ const ProductEditScreen = () => {
 	const {
 		data: product,
 		isLoading,
-		refetch,
 		error,
 	} = useGetProductDetailsQuery(productId);
 
@@ -92,6 +90,7 @@ const ProductEditScreen = () => {
 			<FormContainer>
 				<h1>Edit Product</h1>
 				{loadingUpdate && <Loader />}
+				{loadingUpload && <Loader />}
 				{isLoading ? (
 					<Loader />
 				) : error ? (
@@ -107,7 +106,7 @@ const ProductEditScreen = () => {
 								onChange={(e) => setName(e.target.value)}
 							></Form.Control>
 						</Form.Group>
-						<Form.Group controlId="price" className="my-2">
+						<Form.Group controlId="image" className="my-2">
 							<Form.Label>Image</Form.Label>
 							<Form.Control
 								type="text"
@@ -121,7 +120,7 @@ const ProductEditScreen = () => {
 								onChange={uploadFileHandler}
 							></Form.Control>
 						</Form.Group>
-						<Form.Group controlId="image" className="my-2">
+						<Form.Group controlId="price" className="my-2">
 							<Form.Label>Price</Form.Label>
 							<Form.Control
 								type="number"
