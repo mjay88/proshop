@@ -90,7 +90,6 @@ const ProductEditScreen = () => {
 			<FormContainer>
 				<h1>Edit Product</h1>
 				{loadingUpdate && <Loader />}
-				{loadingUpload && <Loader />}
 				{isLoading ? (
 					<Loader />
 				) : error ? (
@@ -120,6 +119,8 @@ const ProductEditScreen = () => {
 								onChange={uploadFileHandler}
 							></Form.Control>
 						</Form.Group>
+						{loadingUpload && <Loader />}
+
 						<Form.Group controlId="price" className="my-2">
 							<Form.Label>Price</Form.Label>
 							<Form.Control
