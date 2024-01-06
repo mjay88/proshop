@@ -4,11 +4,12 @@ import { apiSlice } from "./apiSlice";
 export const productsApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
 		getProducts: builder.query({
-			query: ({ pageNumber }) => ({
+			query: ({ keyword, pageNumber }) => ({
 				//replaces regular fetch request, useEffect and useState we had on HomeScreen
 				url: PRODUCTS_URL,
 				params: {
 					pageNumber,
+					keyword,
 				},
 			}),
 			providesTags: ["Products"],
